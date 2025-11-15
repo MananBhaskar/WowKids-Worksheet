@@ -5,6 +5,7 @@ import { useNavigate } from 'react-router-dom';
 const Dashboard = () => {
   const [hoveredCard, setHoveredCard] = useState(null);
   const [activeDropdown, setActiveDropdown] = useState(null);
+  const [dropdownTimeout, setDropdownTimeout] = useState(null);
   const navigate = useNavigate();
 
   const dropdownOptions = {
@@ -131,14 +132,29 @@ const Dashboard = () => {
   };
 
   const NavDropdown = ({ title, options, dropdownKey }) => {
-    const isActive = activeDropdown === dropdownKey;
-    
-    return (
-      <div
-        style={{ position: 'relative' }}
-        onMouseEnter={() => setActiveDropdown(dropdownKey)}
-        onMouseLeave={() => setActiveDropdown(null)}
-      >
+  const isActive = activeDropdown === dropdownKey;
+  
+  const handleMouseEnter = () => {
+    if (dropdownTimeout) {
+      clearTimeout(dropdownTimeout);
+      setDropdownTimeout(null);
+    }
+    setActiveDropdown(dropdownKey);
+  };
+
+  const handleMouseLeave = () => {
+    const timeout = setTimeout(() => {
+      setActiveDropdown(null);
+    }, 300);
+    setDropdownTimeout(timeout);
+  };
+  
+  return (
+    <div
+      style={{ position: 'relative' }}
+      onMouseEnter={handleMouseEnter}
+      onMouseLeave={handleMouseLeave}
+    >
         <button
           style={{
             padding: '0.5rem 1rem',

@@ -1,8 +1,11 @@
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 const PreschoolMath = () => {
   const [hoveredCard, setHoveredCard] = useState(null);
   const [activeDropdown, setActiveDropdown] = useState(null);
+  const [dropdownTimeout, setDropdownTimeout] = useState(null);
+    const navigate = useNavigate();
 
   const dropdownOptions = {
     preschool: [
@@ -15,9 +18,9 @@ const PreschoolMath = () => {
       // { label: 'Activity', url: '#activity' }
     ],
     kindergarten: [
-      { label: 'Nursery', url: '#nursery' },
-      { label: 'LKG', url: '#lkg' },
-      { label: 'UKG', url: '#ukg' }
+      { label: 'Nursery', url: '/kindergarten-nursery' },
+      { label: 'LKG', url: '/kindergarten-lkg' },
+      { label: 'UKG', url: '/kindergarten-ukg' }
     ],
     firstGrade: [
       { label: '1st Grade English', url: '#1st-english' },
@@ -127,14 +130,29 @@ const PreschoolMath = () => {
   };
 
   const NavDropdown = ({ title, options, dropdownKey }) => {
-    const isActive = activeDropdown === dropdownKey;
-    
-    return (
-      <div
-        style={{ position: 'relative' }}
-        onMouseEnter={() => setActiveDropdown(dropdownKey)}
-        onMouseLeave={() => setActiveDropdown(null)}
-      >
+  const isActive = activeDropdown === dropdownKey;
+  
+  const handleMouseEnter = () => {
+    if (dropdownTimeout) {
+      clearTimeout(dropdownTimeout);
+      setDropdownTimeout(null);
+    }
+    setActiveDropdown(dropdownKey);
+  };
+
+  const handleMouseLeave = () => {
+    const timeout = setTimeout(() => {
+      setActiveDropdown(null);
+    }, 300);
+    setDropdownTimeout(timeout);
+  };
+  
+  return (
+    <div
+      style={{ position: 'relative' }}
+      onMouseEnter={handleMouseEnter}
+      onMouseLeave={handleMouseLeave}
+    >
         <button
           style={{
             padding: '0.5rem 1rem',
