@@ -1,5 +1,7 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import Navbar from '../components/Navbar'; // Adjust path as needed
+import scholar from '../assets/scholar.png';
 
 const PreschoolTracing = () => {
   const navigate = useNavigate();
@@ -7,42 +9,9 @@ const PreschoolTracing = () => {
   const [activeDropdown, setActiveDropdown] = useState(null);
   const [dropdownTimeout, setDropdownTimeout] = useState(null);
 
-  const dropdownOptions = {
-    preschool: [
-      { label: 'Preschool Tracing', url: '/preschool-tracing' },
-      { label: 'English', url: '/preschool-english' },
-      { label: 'Math', url: '/preschool-math' },
-      { label: 'Science', url: '/preschool-science' },
-      { label: 'Homework', url: '/preschool-homework' },
-      { label: 'Practice', url: '/preschool-practice' },
-      // { label: 'Activity', url: '/preschool-activity' }
-    ],
-    kindergarten: [
-      { label: 'Nursery', url: '/kindergarten-nursery' },
-      { label: 'LKG', url: '/kindergarten-lkg' },
-      { label: 'UKG', url: '/kindergarten-ukg' }
-    ],
-    firstGrade: [
-      { label: '1st Grade English', url: '/1st-grade-english' },
-      { label: '1st Grade Math', url: '/1st-grade-math' },
-      { label: '1st Grade Science', url: '/1st-grade-science' },
-      { label: '1st Grade Social Studies', url: '/1st-grade-social-studies' }
-    ],
-    secondGrade: [
-      { label: '2nd Grade English', url: '/2nd-grade-english' },
-      { label: '2nd Grade Math', url: '/2nd-grade-math' },
-      { label: '2nd Grade Science', url: '/2nd-grade-science' },
-      { label: '2nd Grade Social Studies', url: '/2nd-grade-social-studies' }
-    ],
-    blogs: [
-      { label: 'Educational Tips', url: '/blog-educational-tips' },
-      { label: 'Learning Activities', url: '/blog-learning-activities' },
-      { label: 'Parent Resources', url: '/blog-parent-resources' },
-      { label: 'Teaching Methods', url: '/blog-teaching-methods' }
-    ]
-  };
 
-  const tracingWorksheets = [
+
+  const categories = [
     {
       id: 1,
       title: 'Letter Tracing A-Z',
@@ -217,211 +186,134 @@ const PreschoolTracing = () => {
   return (
     <div style={{ minHeight: '100vh', backgroundColor: '#ffffff' }}>
       {/* Header/Navigation */}
-      <header style={{ backgroundColor: '#ffffff', boxShadow: '0 4px 6px -1px rgba(0,0,0,0.1)', position: 'sticky', top: 0, zIndex: 50 }}>
-        <div style={{ maxWidth: '1280px', margin: '0 auto', padding: '0 1.5rem' }}>
-          <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', height: '90px' }}>
-            <div style={{ display: 'flex', alignItems: 'center' }}>
-              <img 
-                src="/wowkidsworksheet.png" 
-                alt="WowKids Worksheets" 
-                style={{ height: '140px', width: 'auto', cursor: 'pointer' }}
-                onClick={() => navigate('/')}
-              />
-            </div>
+    <Navbar/>
 
-            <nav style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
-              <NavDropdown title="Preschool +" options={dropdownOptions.preschool} dropdownKey="preschool" />
-              <NavDropdown title="Kindergarten +" options={dropdownOptions.kindergarten} dropdownKey="kindergarten" />
-              <NavDropdown title="1st Grade +" options={dropdownOptions.firstGrade} dropdownKey="firstGrade" />
-              <NavDropdown title="2nd Grade +" options={dropdownOptions.secondGrade} dropdownKey="secondGrade" />
-              <NavDropdown title="Blogs +" options={dropdownOptions.blogs} dropdownKey="blogs" />
-              
-              <button style={{ 
-                marginLeft: '1rem', 
-                width: '50px', 
-                height: '50px', 
-                background: 'linear-gradient(135deg, #60a5fa 0%, #22d3ee 100%)', 
-                borderRadius: '50%', 
-                border: 'none',
-                cursor: 'pointer',
-                display: 'flex',
-                alignItems: 'center',
-                justifyContent: 'center',
-                color: '#ffffff',
-                fontSize: '2rem',
-                boxShadow: '0 4px 6px -1px rgba(0,0,0,0.1)'
-              }}>
-                🔍
-              </button>
-              <button 
-                onClick={() => navigate('/privacy-policy')}
-                style={{ 
-                  marginLeft: '0.5rem', 
-                  padding: '0.75rem 1.75rem', 
-                  background: 'linear-gradient(90deg, #fbbf24 0%, #f97316 100%)', 
-                  color: '#ffffff',
-                  borderRadius: '9999px',
-                  fontWeight: 700,
-                  border: '3px dashed #ca8a04',
-                  cursor: 'pointer',
-                  fontSize: '1rem',
-                  boxShadow: '0 4px 6px -1px rgba(0,0,0,0.1)'
-                }}
-              >
-                Privacy Policy
-              </button>
-            </nav>
-          </div>
-        </div>
-      </header>
+{/* Hero Section */}
+<section className="relative bg-gradient-to-br from-amber-100 via-pink-100 via-indigo-100 to-blue-100 py-20 px-6 overflow-hidden min-h-[400px]">
 
-      {/* Hero Section */}
-      <section style={{ 
-        position: 'relative', 
-        background: 'linear-gradient(135deg, #fef3c7 0%, #fce7f3 40%, #e0e7ff 70%, #dbeafe 100%)', 
-        padding: '5rem 1.5rem',
-        overflow: 'hidden',
-        minHeight: '400px'
-      }}>
-        <div style={{ position: 'absolute', top: '2.5rem', left: '5rem', fontSize: '4rem' }}>✏️</div>
-        <div style={{ position: 'absolute', top: '5rem', right: '10rem', fontSize: '3.5rem' }}>📝</div>
-        <div style={{ position: 'absolute', bottom: '5rem', left: '2.5rem', fontSize: '3rem' }}>✨</div>
-        <div style={{ position: 'absolute', bottom: '2.5rem', right: '5rem', fontSize: '4rem' }}>🖍️</div>
+  
+  {/* Doodle decoration - right side */}
+  <img 
+    src="/icons/Open Doodles - Ice Cream.png" 
+    alt="decorative doodle" 
+    className="absolute right-40 top-1/2 -translate-y-1/2 -scale-x-100 w-64 h-auto opacity-50 z-0"
+  />
 
-        <div style={{ maxWidth: '1280px', margin: '0 auto', position: 'relative', zIndex: 10 }}>
-          <div style={{ maxWidth: '42rem' }}>
-            <h1 style={{ fontSize: '4.5rem', fontWeight: 900, color: '#1f2937', marginBottom: '1.5rem', lineHeight: 1.1 }}>
-              Preschool<br />
-              <span style={{ 
-                background: 'linear-gradient(90deg, #9333ea 0%, #ec4899 50%, #3b82f6 100%)', 
-                WebkitBackgroundClip: 'text', 
-                backgroundClip: 'text',
-                color: 'transparent'
-              }}>
-                Tracing Worksheets
-              </span>
-            </h1>
-            <p style={{ fontSize: '1.25rem', color: '#6b7280', marginTop: '1rem' }}>
-              Fun and engaging tracing worksheets to help preschoolers develop fine motor skills and handwriting abilities.
-            </p>
-          </div>
-        </div>
-      </section>
+  {/* Floating Emojis */}
+  <div className="absolute top-10 left-20 text-6xl">✏️</div>
+  <div className="absolute top-20 right-40 text-5xl">📝</div>
+  <div className="absolute bottom-20 left-10 text-5xl">✨</div>
+  <div className="absolute bottom-10 right-20 text-6xl">🖍️</div>
+
+  <div className="max-w-7xl mx-auto relative z-10">
+    <div className="max-w-2xl">
+      <h1 className="text-7xl font-black text-gray-800 mb-6 leading-tight">
+        Preschool<br />
+        <span className="bg-gradient-to-r from-purple-600 via-pink-500 to-blue-500 bg-clip-text text-transparent">
+          Tracing Worksheets
+        </span>
+      </h1>
+      <p className="text-xl text-gray-500 mt-4">
+        Fun and engaging tracing worksheets to help preschoolers develop fine motor skills and handwriting abilities.
+      </p>
+    </div>
+  </div>
+</section>
 
       {/* Main Content Section */}
-      <section style={{ background: 'linear-gradient(180deg, #1e3a8a 0%, #4c1d95 50%, #1e3a8a 100%)', padding: '4rem 1.5rem' }}>
-        <div style={{ maxWidth: '1400px', margin: '0 auto' }}>
-          <h2 style={{ 
-            fontSize: '3rem', 
-            fontWeight: 'bold', 
-            textAlign: 'center', 
-            marginBottom: '2rem',
-            background: 'linear-gradient(90deg, #67e8f9 0%, #86efac 50%, #67e8f9 100%)',
-            WebkitBackgroundClip: 'text',
-            backgroundClip: 'text',
-            color: 'transparent'
-          }}>
-            Tracing Worksheets Collection
+    <section className="relative bg-gradient-to-b from-blue-900 via-purple-900 to-blue-900 py-16 px-6 overflow-hidden">
+
+
+      <div className="max-w-7xl mx-auto relative z-10">
+        {/* Title with decorative elements */}
+        <div className="text-center mb-8 relative">
+          <div className="absolute -top-10 left-1/2 transform -translate-x-1/2 text-2xl animate-bounce"><img src={scholar} alt="scholar" className="w-14 h-14"/></div>
+          <h2 className="text-5xl md:text-6xl font-black mb-4 bg-gradient-to-r from-cyan-300 via-green-300 to-cyan-300 bg-clip-text text-transparent animate-pulse">
+            Wowkids Worksheets
           </h2>
 
-          <p style={{ color: '#ffffff', textAlign: 'center', fontSize: '1.125rem', maxWidth: '80rem', margin: '0 auto 4rem', lineHeight: 1.7 }}>
-            Our preschool tracing worksheets are designed to help young learners develop essential pre-writing skills. From letters 
-            and numbers to shapes and patterns, these engaging activities make learning fun and effective. Each worksheet focuses 
-            on building hand-eye coordination, fine motor control, and pencil grip strength.
-          </p>
+        </div>
 
-          {/* Cards Grid */}
-          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(260px, 1fr))', gap: '2.5rem', maxWidth: '1400px', margin: '0 auto' }}>
-            {tracingWorksheets.map((worksheet) => (
-              <div
-                key={worksheet.id}
-                onMouseEnter={() => setHoveredCard(worksheet.id)}
-                onMouseLeave={() => setHoveredCard(null)}
-                style={{ position: 'relative' }}
-              >
-                <div style={{ 
-                  position: 'relative', 
-                  borderRadius: '1.5rem 1.5rem 0 0', 
-                  overflow: 'hidden',
-                  transform: hoveredCard === worksheet.id ? 'translateY(-8px)' : 'translateY(0)',
-                  transition: 'transform 0.3s'
-                }}>
-                  <div style={{ position: 'relative', height: '32px', background: 'linear-gradient(90deg, #fcd34d 0%, #fb923c 50%, #fcd34d 100%)' }}>
-                    <svg style={{ position: 'absolute', bottom: 0, width: '100%', height: '16px' }} viewBox="0 0 1200 60" preserveAspectRatio="none">
-                      <path d="M0,30 Q300,60 600,30 T1200,30 L1200,60 L0,60 Z" fill="white"/>
-                    </svg>
-                  </div>
+        {/* Description */}
+        <p className="text-white text-center text-lg max-w-5xl mx-auto mb-12 leading-relaxed bg-white/10 backdrop-blur-sm rounded-3xl p-6 border-2 border-white/20">
+          Wowkids Worksheets for kids is a hub of online printable worksheets for toddlers, preschoolers and even adults. 
+          We offer a large variety of online worksheets that come handy, moreover these free worksheets can easily be 
+          incorporated in any syllabus and curriculum. More than 100+ worksheets for everyone. These free printable 
+          worksheets are easy to access, safe for kids of all ages, and compatible with every device. Try these amazing 
+          free printable worksheets for kids and perk up the monotonous learning.
+        </p>
 
-                  <div style={{ background: worksheet.bgGradient, padding: '1.5rem' }}>
-                    <div style={{ 
-                      backgroundColor: '#ffffff', 
-                      borderRadius: '1rem', 
-                      padding: '1rem', 
-                      marginBottom: '1.5rem',
-                      boxShadow: '0 10px 15px -3px rgba(0,0,0,0.1)',
-                      border: '4px solid #e9d5ff',
-                      overflow: 'hidden',
-                      height: '180px',
-                      display: 'flex',
-                      alignItems: 'center',
-                      justifyContent: 'center',
-                      transform: hoveredCard === worksheet.id ? 'scale(1.05)' : 'scale(1)',
-                      transition: 'transform 0.3s'
-                    }}>
+        {/* Cards Grid */}
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+          {categories.map((category) => (
+            <div
+              key={category.id}
+              onMouseEnter={() => setHoveredCard(category.id)}
+              onMouseLeave={() => setHoveredCard(null)}
+              className="group relative"
+            >
+              {/* Floating emoji */}
+              <div className={`absolute -top-6 -right-6 text-6xl z-20 transition-transform duration-300 ${hoveredCard === category.id ? 'scale-125 rotate-12' : 'scale-100'}`}>
+                {category.emoji}
+              </div>
+
+              {/* Card */}
+              <div className={`relative bg-gradient-to-br ${category.bgGradient} rounded-3xl overflow-hidden shadow-2xl transition-all duration-300 ${hoveredCard === category.id ? 'transform -translate-y-4 shadow-3xl' : ''}`}>
+                {/* Decorative wavy top */}
+                <div className="relative h-8 bg-gradient-to-r from-yellow-400 via-orange-400 to-yellow-400">
+                  <svg className="absolute bottom-0 w-full h-4" viewBox="0 0 1200 60" preserveAspectRatio="none">
+                    <path d="M0,30 Q300,60 600,30 T1200,30 L1200,60 L0,60 Z" fill="white"/>
+                  </svg>
+                </div>
+
+                {/* Content */}
+                <div className="p-6">
+                  {/* Image with fun border */}
+                  <div className={`relative bg-white rounded-2xl p-2 mb-6 shadow-lg border-4 border-purple-300 overflow-hidden transition-transform duration-300 ${hoveredCard === category.id ? 'scale-105 rotate-2' : ''}`}>
+                    <div className="h-48 rounded-xl overflow-hidden">
                       <img 
-                        src={worksheet.image} 
-                        alt={worksheet.title}
-                        style={{ width: '100%', height: '100%', objectFit: 'cover', borderRadius: '0.5rem' }}
+                        src={category.image} 
+                        alt={category.title}
+                        className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
                       />
                     </div>
-
-                    <button 
-                      onClick={() => navigate(worksheet.url)}
-                      style={{ 
-                        width: '100%', 
-                        padding: '0.875rem 1.5rem', 
-                        borderRadius: '9999px',
-                        fontWeight: 'bold',
-                        color: '#ffffff',
-                        fontSize: '1.125rem',
-                        background: worksheet.gradient,
-                        border: 'none',
-                        cursor: 'pointer',
-                        boxShadow: '0 10px 15px -3px rgba(0,0,0,0.1)',
-                        transform: hoveredCard === worksheet.id ? 'scale(1.05)' : 'scale(1)',
-                        transition: 'all 0.3s'
-                      }}
-                    >
-                      {worksheet.title}
-                    </button>
+                    {/* Corner decorations */}
+                    <div className="absolute top-0 left-0 text-2xl">🌟</div>
+                    <div className="absolute top-0 right-0 text-2xl">🌟</div>
+                    <div className="absolute bottom-0 left-0 text-2xl">🌟</div>
+                    <div className="absolute bottom-0 right-0 text-2xl">🌟</div>
                   </div>
 
-                  <div style={{ position: 'relative', marginTop: '-1rem' }}>
-                    <button 
-                      onClick={() => navigate(worksheet.url)}
-                      style={{ 
-                        width: '100%', 
-                        padding: '0.875rem 1.5rem', 
-                        background: 'linear-gradient(90deg, #fbbf24 0%, #f97316 50%, #fbbf24 100%)',
-                        color: '#ffffff',
-                        fontWeight: 'bold',
-                        fontSize: '1.125rem',
-                        borderRadius: '0 0 1.5rem 1.5rem',
-                        border: 'none',
-                        cursor: 'pointer',
-                        boxShadow: '0 10px 15px -3px rgba(0,0,0,0.1)',
-                        transition: 'transform 0.3s'
-                      }}
-                    >
-                      View
-                    </button>
-                  </div>
+                  {/* Title Button */}
+                  <button 
+                    onClick={() => handleNavigation(category.url)}
+                    className={`w-full py-4 px-6 rounded-full font-black text-white text-xl mb-4 bg-gradient-to-r ${category.gradient} shadow-lg transition-all duration-300 hover:shadow-2xl hover:scale-105 transform border-4 border-white`}
+                  >
+                    {category.title}
+                  </button>
+
+                  {/* View Button with arrow */}
+                  <button 
+                    onClick={() => handleNavigation(category.url)}
+                    className="w-full py-3 px-6 bg-gradient-to-r from-yellow-400 via-orange-400 to-yellow-400 text-white font-bold text-lg rounded-full shadow-lg transition-all duration-300 hover:shadow-2xl hover:scale-105 flex items-center justify-center gap-2 group"
+                  >
+                    <span>View All</span>
+                    <span className="text-2xl group-hover:translate-x-2 transition-transform duration-300">→</span>
+                  </button>
                 </div>
+
+                {/* Bottom wave decoration */}
+                <svg className="w-full h-6" viewBox="0 0 1200 60" preserveAspectRatio="none">
+                  <path d="M0,30 Q300,0 600,30 T1200,30 L1200,0 L0,0 Z" fill="white" opacity="0.3"/>
+                </svg>
               </div>
-            ))}
-          </div>
+            </div>
+          ))}
         </div>
-      </section>
+
+
+      </div>
+    </section>
 
       {/* Footer */}
       <section style={{ background: 'linear-gradient(180deg, #1e3a8a 0%, #312e81 100%)', padding: '4rem 1.5rem' }}>
