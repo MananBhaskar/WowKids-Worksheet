@@ -11,6 +11,8 @@ import Kindergarten from './pages/Kindergarten.jsx';
 import KindergartenNursery from './pages/KindergartenNursery.jsx';
 import KindergartenLKG from './pages/KindergartenLKG.jsx';
 import KindergartenUKG from './pages/KindergartenUKG.jsx';
+import AdminAuth from './pages/AdminAuth.jsx'; // Add this import
+import AdminDashboard from './pages/AdminDashboard.jsx';
 // import PrivacyPolicy from './pages/PrivacyPolicy.jsx';
 
 function App() {
@@ -18,6 +20,8 @@ function App() {
     <div className="App min-h-screen bg-white">
       <Routes>
         <Route path="/" element={<Dashboard />} />
+        <Route path="/admin/login" element={<AdminAuth />} /> {/* Add this route */}
+        <Route path="/admindashboard" element={<AdminDashboard />} />
         <Route path="/preschool-tracing" element={<PreschoolTracing />} />
         <Route path="/preschool-english" element={<PreschoolEnglish />} />
         <Route path="/preschool-math" element={<PreschoolMath />} />
