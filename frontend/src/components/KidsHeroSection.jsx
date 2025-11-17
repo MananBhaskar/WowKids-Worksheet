@@ -86,10 +86,7 @@ export default function KidsHeroSection() {
           <div style={{ position: 'absolute', top: '1rem', left: '1rem', fontSize: '2.5rem', animation: 'bounce 2s ease-in-out infinite', filter: 'drop-shadow(0 4px 3px rgba(0,0,0,0.1))' }}>⭐</div>
           <div style={{ position: 'absolute', top: '2rem', right: '1rem', fontSize: '2.5rem' }} className="animate-float">🌈</div>
           <div style={{ position: 'absolute', top: '5rem', right: '0.5rem', fontSize: '2rem' }} className="animate-float-delay">☁️</div>
-          <div style={{ position: 'absolute', bottom: '3rem', left: '0.5rem', fontSize: '2rem' }} className="animate-float-delay-2">☁️</div>
           <div style={{ position: 'absolute', bottom: '5rem', right: '1rem', fontSize: '3rem' }} className="animate-wiggle">🥑</div>
-          <div style={{ position: 'absolute', bottom: '1rem', right: '0.5rem', fontSize: '3.5rem' }} className="animate-wiggle-delay">🐊</div>
-          <div style={{ position: 'absolute', top: '8rem', left: '0.5rem', fontSize: '2rem' }} className="animate-bounce-delay">⭐</div>
         </>
       )}
 

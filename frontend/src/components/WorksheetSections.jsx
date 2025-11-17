@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import scholar from '../assets/scholar.png'; 
 
 export default function WorksheetsSection() {
   const [hoveredCard, setHoveredCard] = useState(null);
@@ -90,7 +91,7 @@ export default function WorksheetsSection() {
             fontSize: isMobile ? '1.5rem' : '2rem',
             animation: 'bounce 2s ease-in-out infinite'
           }}>
-            🎓
+            <img src={scholar} alt="scholar" width={32} height={32} />           
           </div>
           <h2 style={{
             fontSize: isMobile ? '2rem' : '3.5rem',
@@ -131,7 +132,7 @@ export default function WorksheetsSection() {
         {/* Cards Grid */}
         <div style={{
           display: 'grid',
-          gridTemplateColumns: isMobile ? '1fr' : 'repeat(auto-fit, minmax(280px, 1fr))',
+          gridTemplateColumns: isMobile ? '1fr' : 'repeat(3, 1fr)',
           gap: isMobile ? '2rem' : '2rem',
           maxWidth: '1400px',
           margin: '0 auto'

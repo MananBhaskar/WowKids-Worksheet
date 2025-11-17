@@ -56,7 +56,6 @@ export default function KidsFooter() {
           marginBottom: isMobile ? '1.5rem' : '2rem',
           maxWidth: '64rem',
           margin: '0 auto',
-          marginBottom: isMobile ? '1.5rem' : '2rem',
           padding: isMobile ? '0 0.5rem' : '0'
         }}>
           Online worksheets for kids - free worksheets, worksheets for adults, worksheets for kids, worksheets for girls, 
