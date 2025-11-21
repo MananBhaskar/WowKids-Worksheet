@@ -1,15 +1,14 @@
 {
-  "name": "backend",
+  "name": "wowkids-backend",
   "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
+  "description": "Backend for WowKids Worksheets",
+  "main": "src/index.js",
   "type": "commonjs",
   "scripts": {
-   "dev": "nodemon src/index.js"
+    "dev": "nodemon src/index.js",
+    "start": "node src/index.js",
+    "seed:admin": "node scripts/seedAdmin.js"
   },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
   "dependencies": {
     "bcrypt": "^6.0.0",
     "cookie-parser": "^1.4.7",
