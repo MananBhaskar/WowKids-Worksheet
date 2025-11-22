@@ -5,6 +5,7 @@ import Navbar from '../components/Navbar.jsx'; // Adjust path as needed
 import KidsHeroSection from '../components/KidsHeroSection.jsx';
 import KidsFooter from '../components/Footer.jsx';
 import WorksheetsSection from '../components/WorksheetSections.jsx';
+import WhatsAppButton from '../components/WhatsAppButton.jsx';
 
 const Dashboard = () => {
   const [hoveredCard, setHoveredCard] = useState(null);
@@ -112,6 +113,11 @@ const Dashboard = () => {
     <WorksheetsSection/>
 
     <KidsFooter/>
+
+    <WhatsAppButton 
+        phoneNumber="919876543210" 
+        message="Hi! I'm interested in your worksheets for kids."
+      />
     </div>
   );
 };

@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
+import { Instagram, Facebook, Twitter } from 'lucide-react';
 
-export default function KidsFooter() {
+export default function Footer() {
   const [isMobile, setIsMobile] = useState(false);
 
   useEffect(() => {
@@ -11,11 +12,24 @@ export default function KidsFooter() {
   }, []);
 
   const socialLinks = [
-    { icon: '🐦', gradient: 'linear-gradient(135deg, #60a5fa 0%, #22d3ee 100%)', url: 'https://twitter.com', name: 'Twitter' },
-    { icon: '📘', gradient: 'linear-gradient(135deg, #2563eb 0%, #1e40af 100%)', url: 'https://facebook.com', name: 'Facebook' },
-    { icon: '📷', gradient: 'linear-gradient(135deg, #ec4899 0%, #9333ea 100%)', url: 'https://instagram.com', name: 'Instagram' },
-    { icon: '▶️', gradient: 'linear-gradient(135deg, #ef4444 0%, #dc2626 100%)', url: 'https://youtube.com', name: 'YouTube' },
-    { icon: '📌', gradient: 'linear-gradient(135deg, #dc2626 0%, #b91c1c 100%)', url: 'https://pinterest.com', name: 'Pinterest' }
+    { 
+      icon: Instagram, 
+      gradient: 'linear-gradient(135deg, #f9ce34, #ee2a7b, #6228d7)',
+      url: 'https://instagram.com/wowkidsworksheets', 
+      name: 'Instagram' 
+    },
+    { 
+      icon: Facebook, 
+      gradient: 'linear-gradient(135deg, #2563eb 0%, #1e40af 100%)',
+      url: 'https://facebook.com/wowkidsworksheets', 
+      name: 'Facebook' 
+    },
+    { 
+      icon: Twitter, 
+      gradient: 'linear-gradient(135deg, #60a5fa 0%, #1DA1F2 100%)',
+      url: 'https://twitter.com/wowkidsworksheets', 
+      name: 'Twitter' 
+    }
   ];
 
   return (
@@ -81,42 +95,44 @@ export default function KidsFooter() {
         <div style={{
           display: 'flex',
           justifyContent: 'center',
-          gap: isMobile ? '0.75rem' : '1rem',
+          gap: isMobile ? '1rem' : '1.5rem',
           marginBottom: isMobile ? '2rem' : '3rem',
           flexWrap: 'wrap',
           padding: isMobile ? '0 1rem' : '0'
         }}>
           {socialLinks.map((social, idx) => (
-            <button
+            <a
               key={idx}
-              onClick={() => window.open(social.url, '_blank')}
+              href={social.url}
+              target="_blank"
+              rel="noopener noreferrer"
               aria-label={social.name}
               style={{
-                width: isMobile ? '48px' : '56px',
-                height: isMobile ? '48px' : '56px',
+                width: isMobile ? '56px' : '64px',
+                height: isMobile ? '56px' : '64px',
                 borderRadius: '50%',
                 background: social.gradient,
                 color: '#ffffff',
-                fontSize: isMobile ? '1.25rem' : '1.5rem',
                 border: 'none',
                 cursor: 'pointer',
                 boxShadow: '0 10px 15px -3px rgba(0,0,0,0.1)',
                 display: 'flex',
                 alignItems: 'center',
                 justifyContent: 'center',
-                transition: 'transform 0.3s'
+                transition: 'transform 0.3s, box-shadow 0.3s',
+                textDecoration: 'none'
               }}
               onMouseEnter={(e) => {
                 e.currentTarget.style.transform = 'scale(1.1)';
-                e.currentTarget.style.boxShadow = '0 20px 25px -5px rgba(0,0,0,0.2)';
+                e.currentTarget.style.boxShadow = '0 20px 25px -5px rgba(0,0,0,0.3)';
               }}
               onMouseLeave={(e) => {
                 e.currentTarget.style.transform = 'scale(1)';
                 e.currentTarget.style.boxShadow = '0 10px 15px -3px rgba(0,0,0,0.1)';
               }}
             >
-              {social.icon}
-            </button>
+              <social.icon size={isMobile ? 28 : 32} strokeWidth={2} />
+            </a>
           ))}
         </div>
 

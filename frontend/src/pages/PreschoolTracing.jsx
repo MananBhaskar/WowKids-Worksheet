@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import Navbar from '../components/Navbar';
+import Footer from '../components/Footer';
+import WhatsAppButton from '../components/WhatsAppButton';
 import scholar from '../assets/scholar.png';
 
 const PreschoolTracing = () => {
@@ -369,8 +371,15 @@ const PreschoolTracing = () => {
         </div>
       </section>
 
+      <WhatsAppButton 
+        phoneNumber="919876543210" 
+        message="Hi! I'm interested in your worksheets for kids."
+      />
+
+      <Footer/>
+
       {/* Footer - RESPONSIVE */}
-      <section style={{ 
+      {/* <section style={{ 
         background: 'linear-gradient(180deg, #1e3a8a 0%, #312e81 100%)', 
         padding: isMobile ? '2rem 1rem' : '4rem 1.5rem' 
       }}>
@@ -447,7 +456,7 @@ const PreschoolTracing = () => {
             © Copyright 2025 <span style={{ fontWeight: 600, color: '#ffffff' }}>WowKids Worksheet</span> - All Rights Reserved
           </p>
         </div>
-      </section>
+      </section> */}
     </div>
   );
 };

@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import Navbar from '../components/Navbar';
+import Footer from '../components/Footer';
+import WhatsAppButton from '../components/WhatsAppButton';
 
 const PreschoolScience = () => {
   const [hoveredCard, setHoveredCard] = useState(null);
@@ -568,8 +570,15 @@ const PreschoolScience = () => {
         </div>
       </section>
 
+      <WhatsAppButton 
+        phoneNumber="919876543210" 
+        message="Hi! I'm interested in your worksheets for kids."
+      />
+
+      <Footer/>
+
       {/* Footer */}
-      <section style={{ background: 'linear-gradient(180deg, #1e3a8a 0%, #312e81 100%)', padding: isMobile ? '2rem 1rem' : '4rem 1.5rem' }}>
+      {/* <section style={{ background: 'linear-gradient(180deg, #1e3a8a 0%, #312e81 100%)', padding: isMobile ? '2rem 1rem' : '4rem 1.5rem' }}>
         <div style={{ maxWidth: '80rem', margin: '0 auto', textAlign: 'center' }}>
           <div style={{ marginBottom: '2rem' }}>
             <div style={{ display: 'inline-block', backgroundColor: '#ffffff', borderRadius: '1rem', padding: '1.25rem 1.5rem', boxShadow: '0 20px 25px -5px rgba(0,0,0,0.1)' }}>
@@ -628,7 +637,7 @@ const PreschoolScience = () => {
             © Copyright 2025 <span style={{ fontWeight: 600, color: '#ffffff' }}>WowKids Worksheets</span> - All Rights Reserved
           </p>
         </div>
-      </section>
+      </section> */}
     </div>
   );
 };

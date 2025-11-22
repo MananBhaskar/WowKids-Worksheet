@@ -1,5 +1,7 @@
 import React, { useState } from 'react';
 import Navbar from '../components/Navbar';
+import WhatsAppButton from '../components/WhatsAppButton';
+import Footer from '../components/Footer';
 
 const KindergartenNursery = () => {
   const [hoveredCard, setHoveredCard] = useState(null);
@@ -531,8 +533,15 @@ const KindergartenNursery = () => {
         </div>
       </section>
 
+      <WhatsAppButton 
+        phoneNumber="919876543210" 
+        message="Hi! I'm interested in your worksheets for kids."
+      />
+
+      <Footer/>
+
       {/* Footer */}
-      <section style={{ background: 'linear-gradient(180deg, #1e3a8a 0%, #312e81 100%)', padding: window.innerWidth <= 768 ? '2rem 1rem' : '4rem 1.5rem' }}>
+      {/* <section style={{ background: 'linear-gradient(180deg, #1e3a8a 0%, #312e81 100%)', padding: window.innerWidth <= 768 ? '2rem 1rem' : '4rem 1.5rem' }}>
         <div style={{ maxWidth: '80rem', margin: '0 auto', textAlign: 'center' }}>
           <div style={{ marginBottom: '2rem' }}>
             <div style={{ display: 'inline-block', backgroundColor: '#ffffff', borderRadius: '1rem', padding: window.innerWidth <= 768 ? '0.75rem 1rem' : '1.25rem 1.5rem', boxShadow: '0 20px 25px -5px rgba(0,0,0,0.1)' }}>
@@ -591,7 +600,7 @@ const KindergartenNursery = () => {
             © Copyright 2025 <span style={{ fontWeight: 600, color: '#ffffff' }}>WowKids Worksheet</span> - All Rights Reserved
           </p>
         </div>
-      </section>
+      </section> */}
     </div>
   );
 };
