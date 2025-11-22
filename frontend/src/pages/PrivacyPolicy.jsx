@@ -1,11 +1,87 @@
-
 import React, { useState, useEffect } from 'react';
-import Navbar from '../components/Navbar';
+import Footer from '../components/Footer';
+
+
+// WhatsApp Button Component
+const WhatsAppButton = ({ phoneNumber = "919876543210", message = "Hi! I'm interested in your worksheets for kids." }) => {
+  const [isHovered, setIsHovered] = useState(false);
+  const [showTooltip, setShowTooltip] = useState(false);
+
+  const handleClick = () => {
+    const encodedMessage = encodeURIComponent(message);
+    const whatsappUrl = `https://wa.me/${phoneNumber}?text=${encodedMessage}`;
+    window.open(whatsappUrl, '_blank');
+  };
+
+  return (
+    <>
+      <style>{`
+        @keyframes pulse {
+          0%, 100% { transform: scale(1); }
+          50% { transform: scale(1.05); }
+        }
+        @keyframes slideIn {
+          from { transform: translateX(100px); opacity: 0; }
+          to { transform: translateX(0); opacity: 1; }
+        }
+        .whatsapp-button { animation: slideIn 0.5s ease-out; }
+        .whatsapp-pulse { animation: pulse 2s ease-in-out infinite; }
+      `}</style>
+
+      <div className="whatsapp-button" style={{ position: 'fixed', bottom: '2rem', right: '2rem', zIndex: 1000 }}>
+        {showTooltip && (
+          <div style={{
+            position: 'absolute', bottom: '100%', right: '0', marginBottom: '0.75rem',
+            backgroundColor: '#ffffff', padding: '0.75rem 1rem', borderRadius: '0.75rem',
+            boxShadow: '0 10px 25px -5px rgba(0,0,0,0.2)', whiteSpace: 'nowrap',
+            fontSize: '0.875rem', fontWeight: 600, color: '#1f2937', border: '2px solid #25D366'
+          }}>
+            Chat with us on WhatsApp! 💬
+            <div style={{
+              position: 'absolute', bottom: '-8px', right: '20px', width: '0', height: '0',
+              borderLeft: '8px solid transparent', borderRight: '8px solid transparent',
+              borderTop: '8px solid #25D366'
+            }}/>
+          </div>
+        )}
+
+        <button
+          onClick={handleClick}
+          onMouseEnter={() => { setIsHovered(true); setShowTooltip(true); }}
+          onMouseLeave={() => { setIsHovered(false); setShowTooltip(false); }}
+          className={!isHovered ? 'whatsapp-pulse' : ''}
+          style={{
+            width: '70px', height: '70px', borderRadius: '50%', backgroundColor: '#25D366',
+            border: 'none', cursor: 'pointer', display: 'flex', alignItems: 'center',
+            justifyContent: 'center', boxShadow: '0 10px 25px -5px rgba(37, 211, 102, 0.5)',
+            transition: 'all 0.3s ease', transform: isHovered ? 'scale(1.1)' : 'scale(1)',
+            position: 'relative'
+          }}
+        >
+          <svg viewBox="0 0 24 24" width="40" height="40" fill="white">
+            <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/>
+          </svg>
+          <div style={{
+            position: 'absolute', top: '2px', right: '2px', width: '20px', height: '20px',
+            borderRadius: '50%', backgroundColor: '#ff4444', display: 'flex',
+            alignItems: 'center', justifyContent: 'center', fontSize: '0.75rem',
+            fontWeight: 700, color: '#ffffff', border: '2px solid white'
+          }}>1</div>
+        </button>
+      </div>
+
+      <style>{`
+        @media (max-width: 768px) {
+          .whatsapp-button { bottom: 1.5rem !important; right: 1.5rem !important; }
+          .whatsapp-button button { width: 60px !important; height: 60px !important; }
+          .whatsapp-button svg { width: 35px !important; height: 35px !important; }
+        }
+      `}</style>
+    </>
+  );
+};
 
 const PrivacyPolicy = () => {
-  const [activeDropdown, setActiveDropdown] = useState(null);
-  const [dropdownTimeout, setDropdownTimeout] = useState(null);
-  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [isMobile, setIsMobile] = useState(false);
 
   useEffect(() => {
@@ -18,279 +94,8 @@ const PrivacyPolicy = () => {
     return () => window.removeEventListener('resize', checkMobile);
   }, []);
 
-  const dropdownOptions = {
-    preschool: [
-      { label: 'Preschool Tracing', url: '/preschool-tracing' },
-      { label: 'English', url: '/preschool-english' },
-      { label: 'Math', url: '/preschool-math' },
-      { label: 'Science', url: '/preschool-science' },
-      { label: 'Homework', url: '/preschool-homework' },
-      { label: 'Practice', url: '/preschool-practice' }
-    ],
-    kindergarten: [
-      { label: 'Nursery', url: '/kindergarten-nursery' },
-      { label: 'LKG', url: '/kindergarten-lkg' },
-      { label: 'UKG', url: '/kindergarten-ukg' }
-    ],
-    firstGrade: [
-      { label: '1st Grade English', url: '/1st-grade-english' },
-      { label: '1st Grade Math', url: '/1st-grade-math' },
-      { label: '1st Grade Science', url: '/1st-grade-science' },
-      { label: '1st Grade Social Studies', url: '/1st-grade-social-studies' }
-    ],
-    secondGrade: [
-      { label: '2nd Grade English', url: '/2nd-grade-english' },
-      { label: '2nd Grade Math', url: '/2nd-grade-math' },
-      { label: '2nd Grade Science', url: '/2nd-grade-science' },
-      { label: '2nd Grade Social Studies', url: '/2nd-grade-social-studies' }
-    ],
-    blogs: [
-      { label: 'Educational Tips', url: '/blog-educational-tips' },
-      { label: 'Learning Activities', url: '/blog-learning-activities' },
-      { label: 'Parent Resources', url: '/blog-parent-resources' },
-      { label: 'Teaching Methods', url: '/blog-teaching-methods' }
-    ]
-  };
-
-  const NavDropdown = ({ title, options, dropdownKey }) => {
-    const isActive = activeDropdown === dropdownKey;
-    
-    const handleMouseEnter = () => {
-      if (dropdownTimeout) {
-        clearTimeout(dropdownTimeout);
-        setDropdownTimeout(null);
-      }
-      setActiveDropdown(dropdownKey);
-    };
-
-    const handleMouseLeave = () => {
-      const timeout = setTimeout(() => {
-        setActiveDropdown(null);
-      }, 300);
-      setDropdownTimeout(timeout);
-    };
-    
-    return (
-      <div
-        style={{ position: 'relative' }}
-        onMouseEnter={handleMouseEnter}
-        onMouseLeave={handleMouseLeave}
-      >
-        <a
-          href="#"
-          style={{
-            padding: '0.5rem 1rem',
-            color: isActive ? '#9333ea' : '#374151',
-            fontWeight: 600,
-            textDecoration: 'none',
-            transition: 'color 0.3s',
-            cursor: 'pointer',
-            display: 'block'
-          }}
-        >
-          {title}
-        </a>
-        {isActive && (
-          <div
-            style={{
-              position: 'absolute',
-              top: '100%',
-              left: 0,
-              backgroundColor: '#ffffff',
-              boxShadow: '0 10px 25px -5px rgba(0,0,0,0.2)',
-              borderRadius: '0.75rem',
-              padding: '0.75rem 0',
-              minWidth: '200px',
-              zIndex: 100,
-              marginTop: '0.5rem',
-              border: '2px dashed #e9d5ff'
-            }}
-          >
-            {options.map((option, idx) => (
-              <a
-                key={idx}
-                href={option.url}
-                style={{
-                  display: 'block',
-                  padding: '0.75rem 1.5rem',
-                  color: '#374151',
-                  textDecoration: 'none',
-                  fontSize: '0.95rem',
-                  transition: 'all 0.2s',
-                  fontWeight: 600
-                }}
-                onMouseEnter={(e) => {
-                  e.currentTarget.style.backgroundColor = '#f3e8ff';
-                  e.currentTarget.style.color = '#9333ea';
-                }}
-                onMouseLeave={(e) => {
-                  e.currentTarget.style.backgroundColor = 'transparent';
-                  e.currentTarget.style.color = '#374151';
-                }}
-              >
-                {option.label}
-              </a>
-            ))}
-          </div>
-        )}
-      </div>
-    );
-  };
-
   return (
     <div style={{ minHeight: '100vh', backgroundColor: '#ffffff' }}>
-    <Navbar />
-      {/* Header/Navigation */}
-      {/* <header style={{ backgroundColor: '#ffffff', boxShadow: '0 4px 6px -1px rgba(0,0,0,0.1)', position: 'sticky', top: 0, zIndex: 50 }}>
-        <div style={{ maxWidth: '1280px', margin: '0 auto', padding: isMobile ? '0 1rem' : '0 1.5rem' }}>
-          <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', height: isMobile ? '70px' : '90px' }}>
-            <div style={{ display: 'flex', alignItems: 'center' }}>
-              <img 
-                src="/wowkidsworksheet.png" 
-                alt="WowKids Worksheets" 
-                style={{ height: isMobile ? '90px' : '140px', width: 'auto', cursor: 'pointer' }}
-              />
-            </div>
-
-            {/* Desktop Navigation
-            {!isMobile && (
-              <nav style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
-                <NavDropdown title="Preschool +" options={dropdownOptions.preschool} dropdownKey="preschool" />
-                <NavDropdown title="Kindergarten +" options={dropdownOptions.kindergarten} dropdownKey="kindergarten" />
-                <NavDropdown title="1st Grade +" options={dropdownOptions.firstGrade} dropdownKey="firstGrade" />
-                <NavDropdown title="2nd Grade +" options={dropdownOptions.secondGrade} dropdownKey="secondGrade" />
-                <NavDropdown title="Blogs +" options={dropdownOptions.blogs} dropdownKey="blogs" />
-                
-                <button style={{ 
-                  marginLeft: '1rem', 
-                  width: '50px', 
-                  height: '50px', 
-                  background: 'linear-gradient(135deg, #60a5fa 0%, #22d3ee 100%)', 
-                  borderRadius: '50%', 
-                  border: 'none',
-                  cursor: 'pointer',
-                  display: 'flex',
-                  alignItems: 'center',
-                  justifyContent: 'center',
-                  color: '#ffffff',
-                  fontSize: '2rem',
-                  boxShadow: '0 4px 6px -1px rgba(0,0,0,0.1)'
-                }}>
-                  🔍
-                </button>
-                <button 
-                  style={{ 
-                    marginLeft: '0.5rem', 
-                    padding: '0.75rem 1.75rem', 
-                    background: 'linear-gradient(90deg, #fbbf24 0%, #f97316 100%)', 
-                    color: '#ffffff',
-                    borderRadius: '9999px',
-                    fontWeight: 700,
-                    border: '3px dashed #ca8a04',
-                    cursor: 'pointer',
-                    fontSize: '1rem',
-                    boxShadow: '0 4px 6px -1px rgba(0,0,0,0.1)'
-                  }}
-                >
-                  Privacy Policy
-                </button>
-              </nav>
-            )}
-
-            {/* Mobile Hamburger Menu 
-            {isMobile && (
-              <button 
-                onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-                style={{ 
-                  width: '45px', 
-                  height: '45px', 
-                  background: 'linear-gradient(135deg, #9333ea 0%, #ec4899 100%)', 
-                  borderRadius: '12px', 
-                  border: 'none',
-                  cursor: 'pointer',
-                  display: 'flex',
-                  flexDirection: 'column',
-                  alignItems: 'center',
-                  justifyContent: 'center',
-                  gap: '5px',
-                  boxShadow: '0 4px 6px -1px rgba(0,0,0,0.1)'
-                }}
-              >
-                <div style={{ width: '25px', height: '3px', backgroundColor: '#ffffff', borderRadius: '2px', transition: 'all 0.3s' }}></div>
-                <div style={{ width: '25px', height: '3px', backgroundColor: '#ffffff', borderRadius: '2px', transition: 'all 0.3s' }}></div>
-                <div style={{ width: '25px', height: '3px', backgroundColor: '#ffffff', borderRadius: '2px', transition: 'all 0.3s' }}></div>
-              </button>
-            )}
-          </div>
-
-          {/* Mobile Menu Dropdown
-          {isMobile && isMobileMenuOpen && (
-            <div style={{
-              position: 'absolute',
-              top: '70px',
-              left: 0,
-              right: 0,
-              backgroundColor: '#ffffff',
-              boxShadow: '0 10px 25px -5px rgba(0,0,0,0.2)',
-              padding: '1rem',
-              maxHeight: '80vh',
-              overflowY: 'auto'
-            }}>
-              {Object.entries(dropdownOptions).map(([key, options]) => (
-                <div key={key} style={{ marginBottom: '1.5rem' }}>
-                  <h3 style={{ 
-                    fontSize: '1.125rem', 
-                    fontWeight: 700, 
-                    color: '#9333ea', 
-                    marginBottom: '0.75rem',
-                    textTransform: 'capitalize'
-                  }}>
-                    {key === 'firstGrade' ? '1st Grade' : key === 'secondGrade' ? '2nd Grade' : key}
-                  </h3>
-                  {options.map((option, idx) => (
-                    <a
-                      key={idx}
-                      href={option.url}
-                      style={{
-                        display: 'block',
-                        padding: '0.75rem 1rem',
-                        color: '#374151',
-                        textDecoration: 'none',
-                        fontSize: '0.95rem',
-                        backgroundColor: '#f9fafb',
-                        marginBottom: '0.5rem',
-                        borderRadius: '0.5rem',
-                        fontWeight: 600
-                      }}
-                      onClick={() => setIsMobileMenuOpen(false)}
-                    >
-                      {option.label}
-                    </a>
-                  ))}
-                </div>
-              ))}
-              <button 
-                style={{ 
-                  width: '100%',
-                  padding: '1rem', 
-                  background: 'linear-gradient(90deg, #fbbf24 0%, #f97316 100%)', 
-                  color: '#ffffff',
-                  borderRadius: '12px',
-                  fontWeight: 700,
-                  border: 'none',
-                  cursor: 'pointer',
-                  fontSize: '1rem',
-                  marginTop: '1rem'
-                }}
-                onClick={() => setIsMobileMenuOpen(false)}
-              >
-                🔍 Search
-              </button>
-            </div>
-          )}
-        </div>
-      </header> */}
-
       {/* Hero Section */}
       <section style={{ 
         position: 'relative', 
@@ -459,7 +264,7 @@ const PrivacyPolicy = () => {
               }}>
                 6. Data Security
               </h2>
-              <p style={{ color: '#4b5563', lineHeight: '1.8', fontSize: isMobile ? '0.95rem' : '1.05rem' }}>
+              <p style={{ color: '#4b5563', lineHeight: 1.8, fontSize: isMobile ? '0.95rem' : '1.05rem' }}>
                 We implement reasonable security measures to protect your information. However, no method of transmission over the internet is 100% secure. We continuously update our security practices to ensure the safety of your data.
               </p>
             </div>
@@ -538,13 +343,20 @@ const PrivacyPolicy = () => {
                 📧 support@wowkidsworksheet.com
               </div>
             </div>
-
           </div>
         </div>
       </section>
 
+      {/* WhatsApp Button */}
+      <WhatsAppButton 
+        phoneNumber="919876543210" 
+        message="Hi! I have a question about your privacy policy."
+      />
+
+      <Footer/>
+
       {/* Footer */}
-      <section style={{ background: 'linear-gradient(180deg, #1e3a8a 0%, #312e81 100%)', padding: isMobile ? '2.5rem 1rem' : '4rem 1.5rem' }}>
+      {/* <section style={{ background: 'linear-gradient(180deg, #1e3a8a 0%, #312e81 100%)', padding: isMobile ? '2.5rem 1rem' : '4rem 1.5rem' }}>
         <div style={{ maxWidth: '80rem', margin: '0 auto', textAlign: 'center' }}>
           <div style={{ marginBottom: '2rem' }}>
             <div style={{ display: 'inline-block', backgroundColor: '#ffffff', borderRadius: '1rem', padding: isMobile ? '1rem 1.25rem' : '1.25rem 1.5rem', boxShadow: '0 20px 25px -5px rgba(0,0,0,0.1)' }}>
@@ -569,9 +381,7 @@ const PrivacyPolicy = () => {
             {[
               { icon: '🐦', gradient: 'linear-gradient(135deg, #60a5fa 0%, #22d3ee 100%)', url: 'https://twitter.com' },
               { icon: '📘', gradient: 'linear-gradient(135deg, #2563eb 0%, #1e40af 100%)', url: 'https://facebook.com' },
-              { icon: '📷', gradient: 'linear-gradient(135deg, #ec4899 0%, #9333ea 100%)', url: 'https://instagram.com' },
-              { icon: '▶️', gradient: 'linear-gradient(135deg, #ef4444 0%, #dc2626 100%)', url: 'https://youtube.com' },
-              { icon: '📌', gradient: 'linear-gradient(135deg, #dc2626 0%, #b91c1c 100%)', url: 'https://pinterest.com' }
+              { icon: '📷', gradient: 'linear-gradient(135deg, #ec4899 0%, #9333ea 100%)', url: 'https://instagram.com' }
             ].map((social, idx) => (
               <button
                 key={idx}
@@ -603,7 +413,7 @@ const PrivacyPolicy = () => {
             © Copyright 2025 <span style={{ fontWeight: 600, color: '#ffffff' }}>WowKids Worksheet</span> - All Rights Reserved
           </p>
         </div>
-      </section>
+      </section> */}
     </div>
   );
 };
